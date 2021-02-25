@@ -2,7 +2,10 @@ const axios = require("axios");
 const qs = require("qs");
 const APP_ID = "b5615dbe-0af5-49fd-ab09-803e91be7bd9";
 const APP_SECERET = "L9c1qlg8x1CfH8StSyfVtkB23vD-C~-.x.";
-
+const USER_NAME = "bgroves@buschegroup.com";
+const PASSWORD = "JesusLives4!";
+// const GRANT_TYPE = "client_credentials";
+const GRANT_TYPE = "password";
 /* 
 uncomment this section after rights have been approved
 const APP_ID = "f2809f71-2041-4796-9e90-0f2beb6d520e";
@@ -19,8 +22,10 @@ class AuthenticationProvider {
     const body = {
       client_id: APP_ID,
       client_secret: APP_SECERET,
+      userName: USER_NAME,
+      password: PASSWORD,
       scope: "https://graph.microsoft.com/.default",
-      grant_type: "client_credentials",
+      grant_type: GRANT_TYPE,
     };
     axios.defaults.headers.post["Content-Type"] =
       "application/x-www-form-urlencoded";

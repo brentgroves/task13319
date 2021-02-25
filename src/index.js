@@ -2,34 +2,29 @@ const mqtt = require("mqtt");
 
 const common = require("@bgroves/common");
 
-const GetClient = require("./GetClient");
-const CreateFolder = require("./CreateFolder");
-const GenIssueProps = require("./GenIssueProps");
-const CreateDoc = require(`./CreateDoc`);
-const UploadDoc = require(`./UploadDoc`);
-const ProcessIssue = require("./ProcessIssue");
+const ProcessTask = require("./ProcessTask");
 var mqttClient;
 
 var { MQTT_SERVER, MQTT_PORT } = process.env;
 
 async function main() {
   try {
-    common.log(`Starting issue13319`);
+    common.log(`Starting task13319`);
     common.log(`MQTT_SERVER=${MQTT_SERVER},MQTT_PORT=${MQTT_PORT}`);
     const mqttClient = mqtt.connect(`mqtt://${MQTT_SERVER}:${MQTT_PORT}`);
 
     mqttClient.on("connect", function () {
-      mqttClient.subscribe("CreateIssueDoc", function (err) {
+      mqttClient.subscribe("CreateEngTask", function (err) {
         if (!err) {
-          common.log("issue13319 subscribed to: CreateIssueDoc");
+          common.log("task13319 subscribed to: CreateEngTask");
         }
       });
     });
     // message is a buffer
     mqttClient.on("message", function (topic, message) {
       const p = JSON.parse(message.toString()); // payload is a buffer
-      common.log(`issue13319.mqtt=>${message.toString()}`);
-      ProcessIssue();
+      common.log(`task13319.mqtt=>${message.toString()}`);
+      ProcessTask();
     });
   } catch (e) {
     console.error(e.name + ": " + e.message);
