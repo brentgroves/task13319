@@ -1,8 +1,7 @@
 const mqtt = require("mqtt");
-
+const ProcessTask = require("./process_task");
 const common = require("@bgroves/common");
 
-const ProcessTask = require("./ProcessTask");
 var mqttClient;
 
 var { MQTT_SERVER, MQTT_PORT } = process.env;
