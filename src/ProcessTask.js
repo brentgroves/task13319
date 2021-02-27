@@ -26,4 +26,5 @@ module.exports = async function () {
     etag
   });
   common.log(`Updated taskDetailsId:${taskDetailsId}`);
+  
 };

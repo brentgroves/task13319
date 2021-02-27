@@ -29,6 +29,8 @@ class AuthenticationProvider {
     };
     axios.defaults.headers.post["Content-Type"] =
       "application/x-www-form-urlencoded";
+    axios.defaults.headers.patch["If-Match"] =
+      "W/\"JzEtVGFza0RldGFpbHMgQEBAQEBAQEBAQEBAQEBAWCc=\"";
     try {
       let response = await axios.post(url, qs.stringify(body));
 
