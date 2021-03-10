@@ -2,7 +2,7 @@ const GetUserAccessToken = require("./get_user_access_token");
 const CreateEngTask = require("./create_eng_task");
 const GetEngTaskDetails = require("./get_eng_task_details");
 const UpdateEngTaskDetails = require("./update_eng_task_details");
-
+const CreateEngIssueFolderLink = require("./create_eng_issue_folder_link");
 module.exports = async function () {
   try {
   console.log(`in ProcessToken`);
@@ -21,8 +21,10 @@ module.exports = async function () {
   });
   console.log(`taskDetailsId=${taskDetailsId},etag=${etag}`);
 
-//   common.log(`taskDetailId:${id},etag:${etag}`);
+  const {webURL} = await CreateEngIssueFolderLink({userAccessToken});
 
+  console.log(`webURL=${webURL}`);
+  const encWebURL =
   await UpdateEngTaskDetails({
     userAccessToken,
     taskId,
