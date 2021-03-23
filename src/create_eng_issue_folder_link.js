@@ -3,17 +3,18 @@ const fs = require("fs");
 //https://masteringjs.io/tutorials/axios/authorization
 // https://graph.microsoft.com/v1.0/groups/3f29dd5d-9118-4747-b72f-c086ab22d7bb/drive/items/016VYMZDAREQG6XMPDPNFLPGJNXRDCX7PJ/createLink
 
-module.exports = async function ({ userAccessToken }) {
+module.exports = async function ({ userAccessToken,subFolderId }) {
   let groupId = "3f29dd5d-9118-4747-b72f-c086ab22d7bb"; // Engineering
   let issueFolderId = "016VYMZDDN5LDCF4BHZRF2DUT2ZORNTAKX"; // Issue210308172828
-  let url = `https://graph.microsoft.com/v1.0/groups/${groupId}/drive/items/${issueFolderId}/createLink`;
+  let url = `https://graph.microsoft.com/v1.0/groups/${groupId}/drive/items/${subFolderId}/createLink`;
+  // let url = `https://graph.microsoft.com/v1.0/groups/${groupId}/drive/items/${issueFolderId}/createLink`;
   
   let body = {
     type: "edit",
     scope: "organization"
   }
 
-  console.log(`In CreateEngIssueFolderLink.url: ${url}`);
+  console.log(`In CreateEngIssueFolderLink.subFolderId:${subFolderId},url: ${url}`);
   const res = await axios.post(url, body, {
     headers: {
       Authorization: userAccessToken

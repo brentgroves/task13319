@@ -3,7 +3,7 @@ const CreateEngTask = require("./create_eng_task");
 const GetEngTaskDetails = require("./get_eng_task_details");
 const UpdateEngTaskDetails = require("./update_eng_task_details");
 const CreateEngIssueFolderLink = require("./create_eng_issue_folder_link");
-module.exports = async function () {
+module.exports = async function ({subFolderId}) {
   try {
   console.log(`in ProcessToken`);
   let cnc = '103';
@@ -21,14 +21,15 @@ module.exports = async function () {
   });
   console.log(`taskDetailsId=${taskDetailsId},etag=${etag}`);
 
-  const {webURL} = await CreateEngIssueFolderLink({userAccessToken});
+  const {webURL} = await CreateEngIssueFolderLink({userAccessToken,subFolderId});
 
   console.log(`webURL=${webURL}`);
-  const encWebURL =
+  // const encWebURL =
   await UpdateEngTaskDetails({
     userAccessToken,
     taskId,
-    etag
+    etag,
+    link:webURL
   });
   console.log(`Updated taskDetailsId:${taskDetailsId}`);
 
